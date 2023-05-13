@@ -1,8 +1,32 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using System.Data
+@model DataTable
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@{
+    ViewData["Title"] = "Fetching Questins";
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayName("Question")</th>
+            <th>@Html.DisplayName("Option1")</th>
+            <th>@Html.DisplayName("Option2")</th>
+            <th>@Html.DisplayName("Option3")</th>
+            <th>@Html.DisplayName("Option4")</th>
+            <th>@Html.DisplayName("Answer")</th>
+            
+        </tr>
+        <tbody>
+            @foreach (DataRow row in Model.Rows)
+            {
+                <tr>
+                <td>@row["question"]</td>
+                <td>@row["Option1"]</td>
+                <td>@row["Option2"]</td>
+                <td>@row["Option3"]</td>
+                <td>@row["Option4"]</td>
+                <td>@row["Answer"]</td>
+                </tr>
+            }
+        </tbody>
+    </thead>
+</table>
