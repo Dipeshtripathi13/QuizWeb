@@ -3,49 +3,67 @@
     ViewData["Title"] = "Fetching Questions";
 }
 <html>
-    <body>
+<body>
     <h1>Take your Text</h1>
-    @foreach (var question in Model)
-{
-    <div>
-        <p>@question.Question</p>
-        <ul>
-            <li>
-                    <input type="radio" id="@question.Option1" name="@question.Question" value="@question.Option1">
-                    <label for="@question.Option1">@question.Option1</label>
-
-            </li>
-            <li>
-                    <input type="radio" id="@question.Option2" name="@question.Question" value="@question.Option2">
-                <label for="@question.Option2">@question.Option2</label>
-            </li>
-            <li>
-                    <input type="radio" id="@question.Option3" name="@question.Question" value="@question.Option3">
-                    <label for="@question.Option3">@question.Option3</label>
-
-            </li>
-            <li>
-
-            
-                    <input type="radio" id="@question.Option4" name="@question.Question" value="@question.Option4">
-                <label for="@question.Option4">@question.Option4</label>
-                </li>
-        </ul>
-        <p>Answer: @question.Answer</p>
-    </div>
-}
-
-    </body>
-</html>
-@section script {
-    <script>
-        var radios = document.querySelectorAll('input[type=radio]');
-        for (var i= 0, i<radios.length; i++){
-            radios[i].addEventListener('click', function(){
-                var answer = this.closest('div').querySelector('.answer');
-                answer.style.display = 'block';
-            })
+    <div class="row">
+        @using (Html.BeginForm("Index2", "Question_Entity", FormMethod.Post))
+        {
+            <div class="form-group">
+                @foreach (var question in Model)
+                {
+                    <div>
+                        <p>@question.Question</p>
+                        <ul>
+                            <li>
+                                <input type="radio" id="@question.Option1" name="@question.Question" value="@question.Option1">
+                                <label for="@question.Option1">@question.Option1</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="@question.Option2" name="@question.Question" value="@question.Option2">
+                                <label for="@question.Option2">@question.Option2</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="@question.Option3" name="@question.Question" value="@question.Option3">
+                                <label for="@question.Option3">@question.Option3</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="@question.Option4" name="@question.Question" value="@question.Option4">
+                                <label for="@question.Option4">@question.Option4</label>
+                            </li>
+                        </ul>
+                        <p class="answer" style="display:none">Answer: @question.Answer</p>
+                    </div>
+                }
+                <button type="submit" class="btn btn-info" id="submit-btn">Submit</button>
+                <div class="form-group" style="display:none">
+                    <label for="B_target">The Answer Is</label>
+                    <br>
+                    <input type="text" class="form-control" id="B_target" name="B_target">
+                    <br>
+                </div>
+            </div>
         }
-    </script>
-}
+    </div>
 
+    <script>
+        document.getElementById('submit-btn').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // Loop through the radio buttons and check if the selected answer matches the correct answer
+            var numCorrect = 0;
+            var radios = document.querySelectorAll('input[type=radio]:checked');
+            for (var i = 0; i < radios.length; i++) {
+                var answer = radios[i].closest('div').querySelector('.answer').innerText.split(": ")[1];
+                if (radios[i].value === answer) {
+                    numCorrect++;
+                }
+            }
+
+            // Display the result
+            var resultDiv = document.getElementById('B_target').closest('div');
+            resultDiv.style.display = 'block';
+            document.getElementById('B_target').value = numCorrect;
+        });
+    </script>
+</body>
+</html>

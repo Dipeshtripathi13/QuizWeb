@@ -54,7 +54,7 @@ namespace QuizWeb.Controllers
                 client.BaseAddress= new Uri(baseURL);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage getData = await client.GetAsync("Question");
+                HttpResponseMessage getData = await client.GetAsync("Question/3");
                 if (getData.IsSuccessStatusCode)
                 {
                     string results = getData.Content.ReadAsStringAsync().Result;
