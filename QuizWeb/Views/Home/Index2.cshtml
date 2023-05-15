@@ -4,13 +4,14 @@
 }
 <html>
 <body>
-    <h1>Take your Text</h1>
+    <h1>Take your Test</h1>
     <div class="row">
         @using (Html.BeginForm("Index2", "Question_Entity", FormMethod.Post))
         {
             <div class="form-group">
                 @foreach (var question in Model)
                 {
+                    
                     <div>
                         <p>@question.Question</p>
                         <ul>
@@ -38,7 +39,7 @@
                 <div class="form-group" style="display:none">
                     <label for="B_target">The Answer Is</label>
                     <br>
-                    <input type="text" class="form-control" id="B_target" name="B_target">
+                    <input type="text" class="form-control" id="Score" name="Score">
                     <br>
                 </div>
             </div>
@@ -53,16 +54,24 @@
             var numCorrect = 0;
             var radios = document.querySelectorAll('input[type=radio]:checked');
             for (var i = 0; i < radios.length; i++) {
-                var answer = radios[i].closest('div').querySelector('.answer').innerText.split(": ")[1];
+                var answerElement = radios[i].closest('div').querySelector('.answer');
+                 var answer = answerElement.innerText.split(": ")[1];
                 if (radios[i].value === answer) {
                     numCorrect++;
+                    answerElement.style.display = 'block';
+                    answerElement.style.backgroundColor = 'green';
                 }
+                 else{
+                    answerElement.style.display = 'block';
+                    answerElement.style.backgroundColor = 'red';
+                }
+                
             }
 
             // Display the result
-            var resultDiv = document.getElementById('B_target').closest('div');
+            var resultDiv = document.getElementById('Score').closest('.form-group');
             resultDiv.style.display = 'block';
-            document.getElementById('B_target').value = numCorrect;
+            document.getElementById('Score').value = numCorrect;
         });
     </script>
 </body>
