@@ -36,6 +36,7 @@
                     </div>
                 }
                 <button type="submit" class="btn btn-info" id="submit-btn">Submit</button>
+                <button type="reset" class="btn btn-danger" id="clear-btn">Clear</button>
                 <div class="form-group" style="display:none">
                     <label for="B_target">The Answer Is</label>
                     <br>
@@ -68,7 +69,7 @@
                 
             }
 
-            // Display the result
+            // Display the result number
             var resultDiv = document.getElementById('Score').closest('.form-group');
             resultDiv.style.display = 'block';
             document.getElementById('Score').value = numCorrect;
