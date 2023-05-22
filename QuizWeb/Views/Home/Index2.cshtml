@@ -47,7 +47,7 @@
         }
     </div>
 
-    <script>
+@*    <script>
         document.getElementById('submit-btn').addEventListener('click', function (e) {
             e.preventDefault();
 
@@ -74,6 +74,38 @@
             resultDiv.style.display = 'block';
             document.getElementById('Score').value = numCorrect;
         });
+    </script>*@
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#submit-btn').on('click', function (e) {
+                e.preventDefault();
+
+                var numCorrect = 0;
+                $('input[type=radio]:checked').each(function () {
+                    var answerElement = $(this).closest('div').find('.answer');
+                    var answer = answerElement.text().split(": ")[1];
+                    if ($(this).val() === answer) {
+                        numCorrect++;
+                        answerElement.css({
+                            display: 'block',
+                            backgroundColor: 'green'
+                        });
+                    } else {
+                        answerElement.css({
+                            display: 'block',
+                            backgroundColor: 'red'
+                        });
+                    }
+                });
+
+                var resultDiv = $('#Score').closest('.form-group');
+                resultDiv.css('display', 'block');
+                $('#Score').val(numCorrect);
+            });
+        });
     </script>
+
 </body>
 </html>

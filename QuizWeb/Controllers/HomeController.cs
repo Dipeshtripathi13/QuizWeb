@@ -11,7 +11,7 @@ namespace QuizWeb.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        string baseURL = "https://localhost:7277";
+        string baseURL = "https://localhost:7229";
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -54,7 +54,7 @@ namespace QuizWeb.Controllers
                 client.BaseAddress= new Uri(baseURL);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage getData = await client.GetAsync("Question/3");
+                HttpResponseMessage getData = await client.GetAsync("Question/random");
                 if (getData.IsSuccessStatusCode)
                 {
                     string results = getData.Content.ReadAsStringAsync().Result;

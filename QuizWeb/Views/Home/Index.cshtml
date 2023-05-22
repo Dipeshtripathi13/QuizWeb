@@ -2,31 +2,39 @@
 @model DataTable
 
 @{
-    ViewData["Title"] = "Fetching Questins";
+    ViewData["Title"] = "Quiz App - Start Page";
 }
-<table class="table">
-    <thead>
-        <tr>
-            <th>@Html.DisplayName("Question")</th>
-            <th>@Html.DisplayName("Option1")</th>
-            <th>@Html.DisplayName("Option2")</th>
-            <th>@Html.DisplayName("Option3")</th>
-            <th>@Html.DisplayName("Option4")</th>
-            <th>@Html.DisplayName("Answer")</th>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 50px;
+        }
+
+        p {
+            color: #666;
+            margin-top: 20px;
+        }
+
+       
+        }
+
             
-        </tr>
-        <tbody>
-            @foreach (DataRow row in Model.Rows)
-            {
-                <tr>
-                <td>@row["question"]</td>
-                <td>@row["Option1"]</td>
-                <td>@row["Option2"]</td>
-                <td>@row["Option3"]</td>
-                <td>@row["Option4"]</td>
-                <td>@row["Answer"]</td>
-                </tr>
-            }
-        </tbody>
+    </style>
+</head>
+<body>
+    <h2>Welcome to the Quiz App!</h2>
+    <p>This quiz app allows you to test your knowledge on various subjects. It consists of a set of questions where you can choose the correct answer from multiple options.</p>
+    <p>Click the "Take Text" button on top to begin the test:</p>
     
-</table>
+</body>
+</html>
